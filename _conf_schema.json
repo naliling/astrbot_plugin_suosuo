@@ -1,0 +1,41 @@
+{
+    "命令前缀": {
+        "description": "命令前缀设置",
+        "type": "object",
+        "items": {
+            "prefix": {
+                "description": "命令前缀列表",
+                "default": ["."],
+                "type": "list"
+            },
+            "allow_empty_prefix": {
+                "description": "开启空前缀",
+                "hint": "允许不输入任何前缀直接触发命令",
+                "default": false,
+                "type": "bool"
+            }
+        }
+    },
+    "命令名称": {
+        "description": "命令触发词设置",
+        "type": "object",
+        "items": {
+            "suo_command": {
+                "description": "嗦命令触发词",
+                "default": "嗦",
+                "type": "string"
+            },
+            "stats_command": {
+                "description": "嗦啼战绩命令触发词",
+                "default": "嗦啼战绩",
+                "type": "string"
+            }
+        }
+    },
+    "auto_save_interval": {
+        "description": "自动保存间隔（秒）",
+        "hint": "有数据变更时，每隔多少秒自动写入磁盘一次",
+        "default": 60,
+        "type": "int"
+    }
+}
