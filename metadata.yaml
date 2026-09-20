@@ -1,0 +1,16 @@
+name: astrbot_plugin_suosuo
+display_name: 嗦蹄子
+short_desc: 嗦嗦群友的蹄子，统计嗦人/被嗦战绩。
+desc: |
+  群互动插件：@群友「嗦」TA 的蹄子，附带对方 QQ 头像与被嗦
+  总次数；支持查询嗦人/被嗦战绩（趣味评价 + 称号）。
+  战绩数据原子写入 + 定时落盘，重启不丢。
+version: 1.0.0
+author: 娜莉灵
+repo: https://github.com/naliling/astrbot_plugin_suosuo
+astrbot_version: ">=4.0.0"
+tags:
+  - 群互动
+  - 娱乐
+  - 嗦蹄子
+  - 小马宝莉
