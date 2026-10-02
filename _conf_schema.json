@@ -1,41 +1,160 @@
 {
-    "命令前缀": {
-        "description": "命令前缀设置",
-        "type": "object",
-        "items": {
-            "prefix": {
-                "description": "命令前缀列表",
-                "default": ["."],
-                "type": "list"
-            },
-            "allow_empty_prefix": {
-                "description": "开启空前缀",
-                "hint": "允许不输入任何前缀直接触发命令",
-                "default": false,
-                "type": "bool"
-            }
-        }
-    },
-    "命令名称": {
-        "description": "命令触发词设置",
-        "type": "object",
-        "items": {
-            "suo_command": {
-                "description": "嗦命令触发词",
-                "default": "嗦",
-                "type": "string"
-            },
-            "stats_command": {
-                "description": "嗦啼战绩命令触发词",
-                "default": "嗦啼战绩",
-                "type": "string"
-            }
-        }
-    },
-    "auto_save_interval": {
-        "description": "自动保存间隔（秒）",
-        "hint": "有数据变更时，每隔多少秒自动写入磁盘一次",
-        "default": 60,
-        "type": "int"
+  "命令前缀": {
+    "description": "命令前缀",
+    "type": "object",
+    "items": {
+      "prefix": {
+        "description": "命令前缀列表",
+        "hint": "例：[\".\"] 表示 .嗦 @某人。留空会被忽略——空前缀会让 startswith 恒真，任何消息都被当成命令。",
+        "default": [
+          "."
+        ],
+        "type": "list"
+      }
     }
+  },
+  "命令名称": {
+    "description": "命令触发词",
+    "type": "object",
+    "items": {
+      "suo_command": {
+        "description": "嗦人命令触发词",
+        "hint": "留空会回退到默认「嗦」。空命令名会让 startswith 恒真，所以不接受空值。",
+        "default": "嗦",
+        "type": "string"
+      },
+      "stats_command": {
+        "description": "战绩命令触发词",
+        "hint": "留空会回退到默认「嗦蹄战绩」。",
+        "default": "嗦蹄战绩",
+        "type": "string"
+      }
+    }
+  },
+  "档位": {
+    "description": "评价与称号档位",
+    "hint": "按次数从小到大排，命中第一个「次数 ≥ min」的档。min 填 0 的那档是兜底，次数为 0 也有话说。",
+    "type": "object",
+    "items": {
+      "comment_tiers": {
+        "description": "评价档位（按嗦人次数）",
+        "type": "list",
+        "items": {
+          "type": "object",
+          "items": {
+            "min": {
+              "description": "最低次数",
+              "type": "int"
+            },
+            "text": {
+              "description": "评价文案",
+              "type": "string"
+            }
+          }
+        },
+        "default": [
+          {
+            "min": 0,
+            "text": "没有人来过这片地方"
+          },
+          {
+            "min": 10,
+            "text": "有点水渍 但不多"
+          },
+          {
+            "min": 50,
+            "text": "这里常年湿润"
+          },
+          {
+            "min": 80,
+            "text": "热带雨林"
+          },
+          {
+            "min": 100,
+            "text": "似乎很美味?"
+          },
+          {
+            "min": 120,
+            "text": "这到底有多美味"
+          }
+        ]
+      },
+      "title_tiers": {
+        "description": "称号档位（按被嗦次数）",
+        "type": "list",
+        "items": {
+          "type": "object",
+          "items": {
+            "min": {
+              "description": "最低次数",
+              "type": "int"
+            },
+            "text": {
+              "description": "称号文案",
+              "type": "string"
+            }
+          }
+        },
+        "default": [
+          {
+            "min": 0,
+            "text": "嗦蹄小白"
+          },
+          {
+            "min": 10,
+            "text": "嗦蹄白银"
+          },
+          {
+            "min": 50,
+            "text": "嗦蹄高手"
+          },
+          {
+            "min": 100,
+            "text": "嗦蹄大神"
+          },
+          {
+            "min": 150,
+            "text": "嗦蹄大手子"
+          }
+        ]
+      }
+    }
+  },
+  "话术": {
+    "description": "话术",
+    "type": "object",
+    "items": {
+      "stats_header": {
+        "description": "战绩标题",
+        "default": "嗦蹄战绩",
+        "type": "string"
+      },
+      "stats_suo": {
+        "description": "嗦人次数行",
+        "default": "嗦人：{count} 次",
+        "type": "string"
+      },
+      "stats_suoed": {
+        "description": "被嗦次数行",
+        "default": "被嗦：{count} 次",
+        "type": "string"
+      },
+      "stats_title": {
+        "description": "称号行",
+        "default": "称号：{text}",
+        "type": "string"
+      },
+      "stats_comment": {
+        "description": "评价行",
+        "default": "评价：{text}",
+        "type": "string"
+      },
+      "avatar_template": {
+        "description": "头像地址模板",
+        "hint": "留空即不显示头像。{qq} 会被替换成被嗦的人 QQ 号。必须以 http:// 或 https:// 开头——AstrBot 的 Image.fromURL 只接受这两种协议，不合格会抛异常把整条命令打挂。",
+        "default": "https://q1.qlogo.cn/g?b=qq&nk={qq}&s=40",
+        "type": "string"
+      }
+    }
+  }
 }
